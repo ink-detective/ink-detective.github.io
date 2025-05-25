@@ -10,7 +10,7 @@ We decided to tackle the problem of ink detection using already segmented scroll
 
 As a source of contemporary bigrams, we decided to use [five epigrams of the Greek philosopher Philodemus](https://www.perseus.tufts.edu/hopper/searchresults?target=greek&all_words=philodemus&all_words_expand=on&phrase=&any_words=&exclude_words=&documents=), since the scrolls were suspected to be by him.
 
-As a source of initialisation for Greek letter shapes, we used [a figure of Greek majuscules from a scientific paper](https://www.researchgate.net/figure/Greek-alphabet-of-24-letters_fig1_374386506).
+As a source of initialization for Greek letter shapes, we used [a figure of Greek majuscules from a scientific paper](https://www.researchgate.net/figure/Greek-alphabet-of-24-letters_fig1_374386506).
 
 ## Preprocessing
 
@@ -42,7 +42,7 @@ Some issues with these results:
 * Overlapping boxes - unclear which letter has the strongest claim on a given box
 * Wrong positives on areas of high white value accumulation
 
-As a next step, we identified adjacent boxes via a definition of neighbourhood. These were considered as potential text or title beginnings. We considered boxes neighbours if:
+As a next step, we identified adjacent boxes via a definition of neighborhood. These were considered as potential text or title beginnings. We considered boxes neighbors if:
 
 * They came from the same layer
 * They had the same letter scale
