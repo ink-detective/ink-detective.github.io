@@ -1,6 +1,6 @@
 # The Ink Detective Approach to the Vesuvius Challenge
 
-This the documentation of a (for now) abandoned approach to solving the [Vesuvius Challenge](https://scrollprize.org/) in 2024/2025 by [sarahkiener](https://github.com/sarahkiener) and [mpoemsl](https://github.com/mpoemsl).
+This is the documentation of a (for now) abandoned approach to solving the [Vesuvius Challenge](https://scrollprize.org/) in 2024/2025 by [sarahkiener](https://github.com/sarahkiener) and [mpoemsl](https://github.com/mpoemsl).
 
 ## The Idea
 
@@ -14,7 +14,13 @@ As a source of initialisation for Greek letter shapes, we used [a figure of Gree
 
 ## Preprocessing
 
-Using the epigrams, we derived a bigram matrix with probabilities of each letter pair. The resulting bigram matrix can be found [here](https://ink-detective.github.io/assets/bigram_matrix.csv).
+Using the epigrams, we derived a bigram matrix with probabilities of each letter pair. The resulting bigram matrix can be found [here](https://ink-detective.github.io/assets/bigram_matrix.csv). The most common bigrams according to our findings were:
+
+* Α Ι
+* Ο Ν
+* Ω Ν
+* Κ Α
+* Τ Ο
 
 ## Algorithm
 
@@ -30,5 +36,31 @@ Applying the algorithm to real scroll data proved to be error-prone, especially 
 
 ![Last Year's Results](https://ink-detective.github.io/assets/single_letter_findings.png)
 
+Some issues with these results:
+
+* Size of boxes is unclear - brute-forceing multiple sizes adds computational complexity
+* Overlapping boxes - unclear which letter has the strongest claim on a given box
+* Wrong positives on areas of high white value accumulation
+
+As a next step, we identified adjacent boxes via a definition of neighbourhood. These were considered as potential text or title beginnings. We considered boxes neighbours if:
+
+* They came from the same layer
+* They had the same letter scale
+* They were at least one box width and at most 1.5 box widths apart
+* They were at most 0.5 box heights apart
+
+We also factored in the a priori bigram probability from the bigram matrix to bias the results towards likely bigrams.
+
+![Successful Bigram Detection](https://ink-detective.github.io/assets/successful_bigram.png)
+Depicted above, one successful bigram detection featuring Υ and Η.
+
+However, we didn't really succeed in finding bigrams in the actual scroll data.
+
+Some reasons for our failure to find bigrams in the actual scroll data:
+
+* The selected Sobel filter algorithm was too coarse and not very successful at identifying vague shapes as letters
+* The scale of the scroll data is massive. We moved to Azure, but costs for data hosting alone turned out to be larger than expected. We did not have access to GPUs. At some point we even ran into RAM issues.
 
 ## Conclusion
+
+It was interesting to try to participate in such a challenge with comparatively simple methods. It turned out the project was a bit too complex to solved with the given computational resources and time availabilities. However, it was fun and we learned a lot.
