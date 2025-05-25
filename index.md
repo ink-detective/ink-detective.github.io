@@ -24,7 +24,7 @@ Using the epigrams, we derived a bigram matrix with probabilities of each letter
 
 ## Algorithm
 
-To keep it simple and in line with our small computational resources, we decided to start using a [Sobel filter](https://en.wikipedia.org/wiki/Sobel_operator) approach. The initial filter values were derived from the Greek letter shapes mentioned earlier. As a data augmentation step, we layered different rotations (+-5 degrees) and distinguish outside empty spaces and inside empty spaces using a [flood fill](https://en.wikipedia.org/wiki/Flood_fill) approach.
+To keep it simple and in line with our small computational resources, we decided to use a [Sobel filter](https://en.wikipedia.org/wiki/Sobel_operator) approach. The initial filter values were derived from the Greek letter shapes mentioned earlier. As a data augmentation step, we layered different rotations (+-5 degrees) and distinguished outside empty spaces from inside empty spaces using a [flood fill](https://en.wikipedia.org/wiki/Flood_fill) approach.
 
 After some experimentation with different convolution methods, we settled on [scipy.signal.fftconvolve](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.fftconvolve.html), which uses fast Fourier transform to obtain convolution.
 
@@ -42,14 +42,14 @@ Some issues with these results:
 * Overlapping boxes - unclear which letter has the strongest claim on a given box
 * Wrong positives on areas of high white value accumulation
 
-As a next step, we identified adjacent boxes via a definition of neighborhood. These were considered as potential text or title beginnings. We considered boxes neighbors if:
+As a next step, we identified adjacent boxes via a definition of neighborhood. These were considered as potential text or title beginnings. We considered boxes to be neighbors if:
 
 * They came from the same layer
 * They had the same letter scale
 * They were at least one box width and at most 1.5 box widths apart
 * They were at most 0.5 box heights apart
 
-We also factored in the a priori bigram probability from the bigram matrix to bias the results towards likely bigrams.
+We also factored in the a priori bigram probabilities from the bigram matrix to bias the results towards likely bigrams.
 
 ![Successful Bigram Detection](https://ink-detective.github.io/assets/successful_bigram.png)
 Depicted above, one successful bigram detection featuring Υ and Η.
