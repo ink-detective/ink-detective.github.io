@@ -63,4 +63,4 @@ Some reasons for our failure to find bigrams in the actual scroll data:
 
 ## Conclusion
 
-It was interesting to try to participate in such a challenge with comparatively simple methods. It turned out the project was a bit too complex to solved with the given computational resources and time availabilities. However, it was fun and we learned a lot.
+It was interesting to try to participate in such a challenge with comparatively simple methods. It turned out the project was a bit too complex to be solved with the given computational resources and time availabilities. However, it was fun and we learned a lot.
